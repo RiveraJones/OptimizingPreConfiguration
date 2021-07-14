@@ -551,7 +551,9 @@ if  Window==Numero_Ventanas_GT  % numIteration == Numero_Ventanas_GT -1 %==maxWi
     else
         results_test_eval(LoggedSignals.conta).vectorOfLabels = categorical(LoggedSignals.ProcessingTimes_vector); % OK ----- [1,N] % categorical(etiquetas_labels_predichas_vector_simplif); % %CAMBIAR
     end
-    
+    cd ..
+    cd ..
+    cd('newDataTesting\results')
     assignin('base','results_test_evalxxx',results_test_eval);
     save results_test_evalxxx.mat results_test_eval
     %             %-------------------------------------------------
