@@ -18,24 +18,29 @@ set newDataTesting=%cd%\newDataTesting\
 echo %newDataTesting%
 MD %newDataTesting%
 
+::creo el path para mi carpeta newDataTesting
+set newResults=%cd%\newDataTesting\results\
+echo %newResults%
+MD %newResults%
+
 ::creo el path para mi la extraccion de users training
-set usersTraining=%cd%\carpetaDataset\training\
+set usersTraining=%cd%\EMG-EPN612Dataset\trainingJSON\
 echo %usersTraining%
 
 ::creo el path para mi la extraccion de users testing
-set usersTesting=%cd%\carpetaDataset\testing\
+set usersTesting=%cd%\EMG-EPN612Dataset\testingJSON\
 echo %usersTesting%
 
-::pause>nul
+pause>nul
 
 ::copias de carpeta base training
 for /L %%x in (1, 1, 3) do (
 	echo %x
-	xcopy %CarpetaBase% "%newDataTraining%User%%x\" /E
+	xcopy %CarpetaBase% "%newDataTraining%user%%x\" /E
 	
-	xcopy "%usersTraining%User%%x\" "%newDataTraining%User%%x\Data\Specific\User%%x\" /E
+	xcopy "%usersTraining%user%%x\" "%newDataTraining%User%%x\Data\Specific\user%%x\" /E
 	
-	cd "%newDataTraining%User%%x"
+	cd "%newDataTraining%user%%x"
 	::cd /D %~dp0
 	call editMyResetFunction.bat %%x
 	call editMyResetFunctionTesting.bat %%x
@@ -45,15 +50,14 @@ for /L %%x in (1, 1, 3) do (
 ::copias de carpeta base a testing
 for /L %%x in (1, 1, 3) do (
 	echo %x
-	xcopy %CarpetaBase% "%newDataTesting%User%%x\" /E
+	xcopy %CarpetaBase% "%newDataTesting%user%%x\" /E
 	
-	xcopy "%usersTesting%User%%x\" "%newDataTesting%User%%x\Data\Specific\User%%x\" /E
+	xcopy "%usersTesting%user%%x\" "%newDataTesting%User%%x\Data\Specific\user%%x\" /E
 	
-	cd "%newDataTesting%User%%x"
+	cd "%newDataTesting%user%%x"
 	::cd /D %~dp0
 	call editMyResetFunction.bat %%x
 	call editMyResetFunctionTesting.bat %%x
 	call editMyStepFunctionTesting.bat %%x
-	ren "%newDataTraining%User%%x\results_test_eval.mat" results_test_eval%%x.mat
 )
 exit
